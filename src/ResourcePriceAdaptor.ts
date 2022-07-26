@@ -26,6 +26,7 @@ export function handlePriceAdaptorsUpdated(event: PriceAdaptorsUpdated): void {
 			resourceEntity = new Resource(resourceId)
 			resourceEntity.type = formatResourceType(type)
 		}
+		resourceEntity.provider = `${event.params.provider.toHex()}`
 		resourceEntity.price = resourcePriceId
 		resourceEntity.save()
 	}
