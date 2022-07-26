@@ -1,5 +1,5 @@
 specVersion: 0.0.4
-description: EcommerceNFT for {{network}}
+description: providers and users in 4everland
 schema:
   file: ./schema.graphql
 dataSources:
