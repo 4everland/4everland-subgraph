@@ -1,0 +1,155 @@
+specVersion: 0.0.4
+description: EcommerceNFT for {{network}}
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ProviderController
+    network: "{{ network }}"
+    source:
+      address: "{{ ProviderController }}"
+      abi: ProviderController 
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - ProviderController
+      abis:
+        - name: ProviderController
+          file: ./abis/ProviderController.json
+      eventHandlers:
+        - event: AccountRegistered(address,bytes32)
+          handler: handleAccountRegistered
+      file: ./src/ProviderController.ts
+  - kind: ethereum
+    name: ProviderRegistry
+    network: "{{ network }}"
+    source:
+      address: "{{ ProviderRegistry }}"
+      abi: ProviderRegistry 
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - ProviderRegistry
+      abis:
+        - name: ProviderRegistry
+          file: ./abis/ProviderRegistry.json
+      eventHandlers:
+        - event: AddProvider(address)
+          handler: handleAddProvider
+      file: ./src/ProviderRegistry.ts
+  - kind: ethereum
+    name: ResourcePriceAdaptor
+    network: "{{ network }}"
+    source:
+      address: "{{ ResourcePriceAdaptor }}"
+      abi: ResourcePriceAdaptor 
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - ResourcePriceAdaptor
+      abis:
+        - name: ResourcePriceAdaptor
+          file: ./abis/ResourcePriceAdaptor.json
+      eventHandlers:
+        - event: PriceAdaptorsUpdated(address,(uint8,uint256)[])
+          handler: handlePriceAdaptorsUpdated
+      file: ./src/ResourcePriceAdaptor.ts
+  - kind: ethereum
+    name: BuildingTimeController
+    network: "{{ network }}"
+    source:
+      address: "{{ BuildingTimeController }}"
+      abi: BuildingTimeController 
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - BuildingTimeController
+      abis:
+        - name: BuildingTimeController
+          file: ./abis/BuildingTimeController.json
+      eventHandlers:
+        - event: AccountAllocated(address,bytes32,uint256)
+          handler: handleAccountAllocated
+        - event: ProviderAllocated(address,uint256)
+          handler: handleProviderAllocated
+      file: ./src/BuildingTimeController.ts
+  - kind: ethereum
+    name: BandwidthController
+    network: "{{ network }}"
+    source:
+      address: "{{ BandwidthController }}"
+      abi: BandwidthController 
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - BandwidthController
+      abis:
+        - name: BandwidthController
+          file: ./abis/BandwidthController.json
+      eventHandlers:
+        - event: AccountAllocated(address,bytes32,uint256)
+          handler: handleAccountAllocated
+        - event: ProviderAllocated(address,uint256)
+          handler: handleProviderAllocated
+      file: ./src/BandwidthController.ts
+  - kind: ethereum
+    name: ARStorageController
+    network: "{{ network }}"
+    source:
+      address: "{{ ARStorageController }}"
+      abi: ARStorageController 
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - ARStorageController
+      abis:
+        - name: ARStorageController
+          file: ./abis/ARStorageController.json
+      eventHandlers:
+        - event: AccountAllocated(address,bytes32,uint256)
+          handler: handleAccountAllocated
+        - event: ProviderAllocated(address,uint256)
+          handler: handleProviderAllocated
+      file: ./src/ARStorageController.ts
+  - kind: ethereum
+    name: IPFSStorageController
+    network: "{{ network }}"
+    source:
+      address: "{{ IPFSStorageController }}"
+      abi: IPFSStorageController 
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - IPFSStorageController
+      abis:
+        - name: IPFSStorageController
+          file: ./abis/IPFSStorageController.json
+      eventHandlers:
+        - event: AccountAllocated(address,bytes32,uint256,uint256)
+          handler: handleAccountAllocated
+        - event: ProviderAllocated(address,uint256,uint256)
+          handler: handleProviderAllocated
+        - event: ProviderRecovered(address,bytes32,uint256)
+          handler: handleProviderRecovered
+      file: ./src/IPFSStorageController.ts

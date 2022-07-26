@@ -1,0 +1,104 @@
+## all resource providers
+type Provider @entity {
+	id: ID!
+	address: Bytes!
+	buildingTime: ProviderBuildingTime
+	bandwidth: ProviderBandwidth
+	arStorage: ProviderARStorage
+	ipfsStorage: ProviderIPFSStorage
+	txHash: Bytes!
+	timestamp: BigInt!
+}
+
+## all accounts
+type Account @entity {
+	id: ID!
+	provider: Provider!
+	uid: Bytes!
+	buildingTime: UserBuildingTime
+	bandwidth: UserBandwidth
+	arStorage: UserARStorage
+	ipfsStorage: UserIPFSStorage
+	txHash: Bytes!
+	timestamp: BigInt!
+}
+
+## provider resources with price
+type Resource @entity {
+	id: ID!
+	provider: Provider!
+	price: ResourcePrice
+	type: String!
+}
+
+## resources price on specific block
+type ResourcePrice @entity {
+	id: ID!
+	resource: Resource!
+	indexBlock: BigInt!
+	price: BigInt!
+}
+
+## user's buildingtime
+type UserBuildingTime @entity {
+	id: ID!
+	provider: Provider!
+	account: Account!
+	amount: BigInt!
+}
+
+## user's bandwidth
+type UserBandwidth @entity {
+	id: ID!
+	provider: Provider!
+	account: Account!
+	amount: BigInt!
+}
+
+## user's `ar` storage
+type UserARStorage @entity {
+	id: ID!
+	provider: Provider!
+	account: Account!
+	amount: BigInt!
+}
+
+## user's ipfs storage
+type UserIPFSStorage @entity {
+	id: ID!
+	provider: Provider!
+	account: Account!
+	amount: BigInt!
+	startTime: BigInt!
+	expiration: BigInt!
+}
+
+## provider's buildingtime
+type ProviderBuildingTime @entity {
+	id: ID!
+	provider: Provider!
+	amount: BigInt!
+}
+
+## provider's bandwidth
+type ProviderBandwidth @entity {
+	id: ID!
+	provider: Provider!
+	amount: BigInt!
+}
+
+## provider's ar storage
+type ProviderARStorage @entity {
+	id: ID!
+	provider: Provider!
+	amount: BigInt!
+}
+
+## provider's ipfs storage
+type ProviderIPFSStorage @entity {
+	id: ID!
+	provider: Provider!
+	amount: BigInt!
+	startTime: BigInt!
+	expiration: BigInt!
+}

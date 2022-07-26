@@ -1,0 +1,11 @@
+{
+	"network": "matic",
+	"startBlock": 30064283,
+	"ProviderController": "0x60849aFC60da8686a33e54D7fAfeff7804BF63E2",
+	"ProviderRegistry": "0xBE315C9c13c4D12f4E4e12Ec11aC5123d4E540B7",
+	"ARStorageController": "0xEeEDEF4aDe21065FE254C7cc4a684f4D7E706419",
+	"BandwidthController": "0x19f240DD39FEF12D139a4E0Ae81f44945c06092f",
+	"BuildingTimeController": "0x2C08a9287A7B37c4fB6e154b3602C930381d5666",
+	"IPFSStorageController": "0xAcdcA934E9D4dAA07E4B092fb8395DD872c3221C",
+	"ResourcePriceAdaptor": "0x598a237eb2c0efe381C3b6a22e36220C2e2C74b6"
+}
