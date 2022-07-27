@@ -23,6 +23,14 @@ type Account @entity {
 	timestamp: BigInt!
 }
 
+## analytics
+type Analytic @entity {
+	id: ID!
+	accountCount: BigInt
+	ipfsStorageUsage: BigInt
+	arStorageUsage: BigInt
+}
+
 ## provider resources with price
 type Resource @entity {
 	id: ID!

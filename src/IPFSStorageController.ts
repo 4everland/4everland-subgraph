@@ -1,5 +1,7 @@
+import { BigInt } from '@graphprotocol/graph-ts'
 import { AccountAllocated, ProviderAllocated, IPFSStorageController } from './types/IPFSStorageController/IPFSStorageController'
 import { Account, Provider, UserIPFSStorage, ProviderIPFSStorage } from './types/schema'
+import { analytics } from './utils'
 
 export function handleAccountAllocated(event: AccountAllocated): void {
 	const provider = event.params.provider
@@ -19,6 +21,13 @@ export function handleAccountAllocated(event: AccountAllocated): void {
 
 	accountEntity.ipfsStorage = userIPFSStorageEntityId
 	accountEntity.save()
+
+	const analyticEntity = analytics()
+	if (!analyticEntity.ipfsStorageUsage) {
+		analyticEntity.ipfsStorageUsage = BigInt.fromU64(0)
+	}
+	analyticEntity.ipfsStorageUsage = analyticEntity.ipfsStorageUsage!.plus(event.params.amount)
+	analyticEntity.save()
 
 }
 

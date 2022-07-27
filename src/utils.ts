@@ -1,3 +1,14 @@
+import { Analytic } from './types/schema'
+
+export function analytics(): Analytic {
+	const analyticId = 'Analytic'
+	let analyticEntity = Analytic.load(analyticId)
+	if (!analyticEntity) {
+		analyticEntity = new Analytic(analyticId)
+	}
+	return analyticEntity
+}
+
 export function formatResourceType(type: i32): string {
 	switch (type) {
 		case 1:

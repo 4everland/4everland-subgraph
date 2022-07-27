@@ -1,5 +1,7 @@
+import { BigInt } from '@graphprotocol/graph-ts'
 import { AccountAllocated, ProviderAllocated, ARStorageController } from './types/ARStorageController/ARStorageController'
 import { Account, Provider, UserARStorage, ProviderARStorage } from './types/schema'
+import { analytics } from './utils'
 
 export function handleAccountAllocated(event: AccountAllocated): void {
 	const provider = event.params.provider
@@ -17,6 +19,13 @@ export function handleAccountAllocated(event: AccountAllocated): void {
 
 	accountEntity.arStorage = userARStorageEntityId
 	accountEntity.save()
+
+	const analyticEntity = analytics()
+	if (!analyticEntity.arStorageUsage) {
+		analyticEntity.arStorageUsage = BigInt.fromU64(0)
+	}
+	analyticEntity.arStorageUsage = analyticEntity.arStorageUsage!.plus(event.params.amount)
+	analyticEntity.save()
 
 }
 
